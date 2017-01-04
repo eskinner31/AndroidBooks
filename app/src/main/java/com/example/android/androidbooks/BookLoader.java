@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BookLoader extends AsyncTaskLoader<List<Book>> {
 
-    private static final String TAG = BookLoader.class.getName();
+    private static final String TAG = BookLoader.class.getSimpleName();
 
     private String mUrl;
 
@@ -27,6 +27,11 @@ public class BookLoader extends AsyncTaskLoader<List<Book>> {
 
     @Override
     public List<Book> loadInBackground() {
+        if(mUrl == null) {
+            return null;
+        }
 
+        List<Book> books = QueryUtils.getBooks(mUrl);
+        return books;
     }
 }
