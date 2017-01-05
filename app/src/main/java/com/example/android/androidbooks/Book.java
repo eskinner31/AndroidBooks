@@ -1,7 +1,5 @@
 package com.example.android.androidbooks;
 
-import android.media.Image;
-
 /**
  * Created by Skinner on 12/24/16.
  */
@@ -9,22 +7,24 @@ import android.media.Image;
 public class Book {
     private String mTitle;
     private String mAuthor;
-    private String mDescription;
-    private Image mImage;
+    private String mRating;
+    private String mImage;
 
-    public Book(String title, String author, String description, Image image) {
+    public Book(String title, String author, String rating, String imageUrl) {
         mTitle = title;
         mAuthor = author;
-        mDescription = description;
-        mImage = image;
+        mRating = rating;
+        mImage = imageUrl;
     }
 
-    public Image getmImage() {
+    public String getmImage() {
+
+        //TODO: Can we use this method to return the image from the url?
         return mImage;
     }
 
-    public String getmDescription() {
-        return mDescription;
+    public String getmRating() {
+        return mRating;
     }
 
     public String getmAuthor() {

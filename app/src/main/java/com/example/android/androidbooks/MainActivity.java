@@ -8,7 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>>, SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>>,
+        SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    private final String GOOGLE_BOOKS_BASE_URL = getString(R.string.google_books_base_url);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-        
+
     }
 
     @Override

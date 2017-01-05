@@ -35,8 +35,8 @@ public class BookArrayAdapter extends ArrayAdapter<Book> {
         authorTextView.setText(currentBook.getmAuthor());
 
         //Set Description Info
-        TextView descriptionTextView = (TextView) listItemView.findViewById(R.id.book_description);
-        descriptionTextView.setText(currentBook.getmDescription());
+        TextView descriptionTextView = (TextView) listItemView.findViewById(R.id.book_rating);
+        descriptionTextView.setText(currentBook.getmRating());
 
         //Set Book Title Info
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.book_title);
