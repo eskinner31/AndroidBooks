@@ -57,7 +57,6 @@ public final class QueryBooks {
         return url;
     }
 
-    //TODO: Structure Proper HTTP REQUEST TO GOOGLE BOOKS API
     private static String bookHttpRequest(URL url) throws IOException {
         String response = "";
 
@@ -147,8 +146,10 @@ public final class QueryBooks {
                 JSONObject imageObject = currentVolumeInfo.getJSONObject("imageLinks");
                 String currentImageUrl = imageObject.getString("thumbnail");
 
+
                 Book book = new Book(currentTitle, currentPrimaryAuthor, currentRating, currentImageUrl);
 
+                Log.d(TAG, "parseJsonFeatures: BOOK TO STRING" + book.toString());
                 books.add(book);
             }
         } catch (JSONException e) {

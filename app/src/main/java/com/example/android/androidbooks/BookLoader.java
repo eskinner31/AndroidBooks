@@ -11,6 +11,13 @@ import java.util.List;
 
 public class BookLoader extends AsyncTaskLoader<List<Book>> {
 
+    /**
+     * Why wouldn't we store the baseURL for the Google Api in the Loader or
+     * in the QueryBooks class. Wouldn't it be more OOD since the classes that are
+     * actually responsible for talking to google know the information that they need
+     * rather than the MainActivity class whose major responsibility is for coordinating thes
+     * display of the final result?
+     */
     private static final String TAG = BookLoader.class.getSimpleName();
 
     private String mUrl;
