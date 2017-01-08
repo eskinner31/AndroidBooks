@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AndroidBooks</string>
-    <string name="api_key">AIzaSyDYBwcyHbItLmp4KD42UfVBc4F1ntARdkQ</string>
     <string name="edit_text_prompt">Enter Book Title</string>
     <string name="submit_button_text">Submit</string>
-    <string name="google_books_base_url">https://www.googleapis.com/books/v1/volumes</string>
+    <string name="blank_list_string">Search below for a book.</string>
+    <string name="place_holderText">Something Something Darkside</string>
 </resources>

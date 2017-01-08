@@ -37,7 +37,11 @@ public class BookArrayAdapter extends ArrayAdapter<Book> {
 
         //Set Rating Info
         TextView bookRatingTextView = (TextView) listItemView.findViewById(R.id.book_rating);
-        bookRatingTextView.setText(currentBook.getmRating());
+        if (currentBook.getmRating() != null) {
+            bookRatingTextView.setText(currentBook.getmRating());
+        } else {
+            bookRatingTextView.setVisibility(View.GONE);
+        }
 
         //Set Book Title Info
         TextView titleTextView = (TextView) listItemView.findViewById(R.id.book_title);

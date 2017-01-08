@@ -26,11 +26,7 @@ public class Book {
 
     }
 
-    public Bitmap getmImage() {
-
-        //TODO: Can we use this method to return the image from the url?
-        return mImage;
-    }
+    public Bitmap getmImage() { return mImage; }
 
     public String getmRating() {
         return mRating;

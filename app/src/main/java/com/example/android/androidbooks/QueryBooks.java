@@ -78,11 +78,14 @@ public final class QueryBooks {
             urlConnection.connect();
 
             if (urlConnection.getResponseCode() == 200) {
+
                 //if successful retrieve the stream aka the response
                 inputStream = urlConnection.getInputStream();
 
-                //use a stream reader aka string builder to put together our data into
-                //parseable json;
+                /**
+                 * use a stream reader aka string builder to put together our data into
+                 * parseable json;
+                 */
                 response = streamReader(inputStream);
 
             } else {
@@ -98,7 +101,6 @@ public final class QueryBooks {
             if (inputStream != null) {
                 inputStream.close(); //CLOSE YOUR STREAM
             }
-
         }
         return response;
     }
@@ -133,8 +135,6 @@ public final class QueryBooks {
             for (int i = 0; i< booksArray.length(); i++) {
                 JSONObject currentBook = booksArray.getJSONObject(i);
 
-                Log.d(TAG, "parseJsonFeatures: currentBook" + currentBook);
-
                 //parse title
                 JSONObject currentVolumeInfo = currentBook.getJSONObject("volumeInfo");
                 String currentTitle = currentVolumeInfo.getString("title");
@@ -143,16 +143,16 @@ public final class QueryBooks {
                 JSONArray authorsArray = currentVolumeInfo.getJSONArray("authors");
                 String currentPrimaryAuthor = authorsArray.getString(0);
 
-                //parse rating
-                String currentRating = currentVolumeInfo.getString("averageRating");
-                Log.d(TAG, "parseJsonFeatures: currentRating" + currentRating);
+                //parse rating -> need to check for value since it does not always return
+                String currentRating = null;
+                if (currentVolumeInfo.has("averageRating")) {
+                    currentRating = currentVolumeInfo.getString("averageRating");
+                }
 
-                //parse image
+                //parse image -> Need to research caching the returned image
                 JSONObject imageObject = currentVolumeInfo.getJSONObject("imageLinks");
                 String currentImageUrl = imageObject.getString("thumbnail");
                 Bitmap imageBitmap = getBookImage(currentImageUrl);
-
-
 
                 Book book;
 
@@ -162,12 +162,9 @@ public final class QueryBooks {
                     book = new Book(currentTitle, currentPrimaryAuthor, imageBitmap);
                 }
 
-
-                Log.d(TAG, "parseJsonFeatures: BOOK TO STRING" + book.getmRating().toString());
                 books.add(book);
             }
         } catch (JSONException e) {
-
             Log.e(TAG, "Issues with Json Parsing", e);
         }
 
