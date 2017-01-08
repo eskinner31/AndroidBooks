@@ -1,5 +1,7 @@
 package com.example.android.androidbooks;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -131,6 +133,8 @@ public final class QueryBooks {
             for (int i = 0; i< booksArray.length(); i++) {
                 JSONObject currentBook = booksArray.getJSONObject(i);
 
+                Log.d(TAG, "parseJsonFeatures: currentBook" + currentBook);
+
                 //parse title
                 JSONObject currentVolumeInfo = currentBook.getJSONObject("volumeInfo");
                 String currentTitle = currentVolumeInfo.getString("title");
@@ -140,22 +144,48 @@ public final class QueryBooks {
                 String currentPrimaryAuthor = authorsArray.getString(0);
 
                 //parse rating
-                String currentRating = currentVolumeInfo.getString("averageRating").toString();
+                String currentRating = currentVolumeInfo.getString("averageRating");
+                Log.d(TAG, "parseJsonFeatures: currentRating" + currentRating);
 
                 //parse image
                 JSONObject imageObject = currentVolumeInfo.getJSONObject("imageLinks");
                 String currentImageUrl = imageObject.getString("thumbnail");
+                Bitmap imageBitmap = getBookImage(currentImageUrl);
 
 
-                Book book = new Book(currentTitle, currentPrimaryAuthor, currentRating, currentImageUrl);
 
-                Log.d(TAG, "parseJsonFeatures: BOOK TO STRING" + book.toString());
+                Book book;
+
+                if (currentRating != null) {
+                    book = new Book(currentTitle, currentPrimaryAuthor, currentRating, imageBitmap);
+                } else {
+                    book = new Book(currentTitle, currentPrimaryAuthor, imageBitmap);
+                }
+
+
+                Log.d(TAG, "parseJsonFeatures: BOOK TO STRING" + book.getmRating().toString());
                 books.add(book);
             }
         } catch (JSONException e) {
+
             Log.e(TAG, "Issues with Json Parsing", e);
         }
 
         return books;
+    }
+
+    private static Bitmap getBookImage(String imageUrlSource) {
+        try {
+            URL source = new URL(imageUrlSource);
+            HttpURLConnection connection = (HttpURLConnection) source.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap imageBitmap = BitmapFactory.decodeStream(input);
+            return imageBitmap;
+        } catch (Exception e) {
+            Log.d(TAG, "getBookImage: bitmap exception" + e);
+        }
+        return null;
     }
 }

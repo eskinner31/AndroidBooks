@@ -63,9 +63,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
     }
 
-    //TODO: Check for connectivity, add sharedpreferences (MAY NOT NEED PREFERENCES UNLESS WE HAVE TO RELOAD ON ORIENTATION CHANGE for orientation, set up loader
+
+    //TODO: May need to leverage shared preferences
 
     //TODO: Create a loading screen
+
+    //TODO: Create Blank Screen ON FRESH START
+
+    //TODO: Persist results when orientation changes
+
+    //TODO: Add Polish
+
+
 
     public void initiateSearch() {
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
